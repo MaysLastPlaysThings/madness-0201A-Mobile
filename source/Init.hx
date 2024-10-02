@@ -8,13 +8,6 @@ class Init extends FlxState
 
         Paths.clearStoredMemory();
 
-		//we aint using the mod folder so 
-		
-		// #if LUA_ALLOWED
-		// Mods.pushGlobalMods();
-		// #end
-		// Mods.loadTopMod();
-
 		FlxG.fixedTimestep = false;
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.keys.preventDefaultKeys = [TAB];
@@ -25,7 +18,6 @@ class Init extends FlxState
 
 		backend.Highscore.load();
 
-
         if(FlxG.save.data != null && FlxG.save.data.fullscreen)
         {
             FlxG.fullscreen = FlxG.save.data.fullscreen;
@@ -35,17 +27,13 @@ class Init extends FlxState
 		{
 			states.StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
-
-
 		
-
 		FlxG.signals.postUpdate.add(up);
         super.create();
 
 		#if debug FlxG.sound.playMusic(Paths.music('freakyMenu'),0.3); #end
         FlxG.switchState(new #if !debug NGIntro #else MadnessMenu #end ());
     }
-
 
 	var upTime:Float = 0;
 	var interval = 10;
@@ -66,7 +54,6 @@ class Init extends FlxState
 				}
 			}
 		}
-
 
 	}
 }
