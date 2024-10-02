@@ -95,7 +95,11 @@ class Main extends Sprite
 		Controls.instance = new Controls();
 		ClientPrefs.loadDefaultKeys();
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
-		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		#if mobile
+		addChild(new FlxGame(1280, 720, Init, 60, 60, true, false));
+		#else
+		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		#end
 
 		#if !mobile
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
