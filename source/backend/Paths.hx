@@ -238,8 +238,10 @@ class Paths
 				localTrackedAssets.push(file);
 				return currentTrackedAssets.get(file);
 			}
+			#if MODS_ALLOWED
 			else if (FileSystem.exists(file))
 				bitmap = BitmapData.fromFile(file);
+			#end
 			else if (OpenFlAssets.exists(file, IMAGE))
 				bitmap = OpenFlAssets.getBitmapData(file);
 		}
