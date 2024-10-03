@@ -3385,7 +3385,7 @@ class PlayState extends MusicBeatState
 		var scriptToLoad:String = Paths.getSharedPath(scriptFile);
 		#end
 
-		if(FileSystem.exists(scriptToLoad))
+		if(OpenFlAssets.exists(scriptToLoad))
 		{
 			if (SScript.global.exists(scriptToLoad)) return false;
 
