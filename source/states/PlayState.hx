@@ -644,22 +644,21 @@ class PlayState extends MusicBeatState
 			eventNotes.sort(sortByTime);
 		}
 
-		// SONG SPECIFIC SCRIPTS
-		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'data/$songName/'))
-			for (file in FileSystem.readDirectory(folder))
-			{
-				#if LUA_ALLOWED
-				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
-				#end
+        // SONG SPECIFIC SCRIPTS
+        #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+            for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/'))
+            {
+                #if LUA_ALLOWED
+                if(file.toLowerCase().endsWith('.lua'))
+                    new FunkinLua(file);
+                #end
 
-				#if HSCRIPT_ALLOWED
-				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
-				#end
-			}
-		#end
+                #if HSCRIPT_ALLOWED
+                if(file.toLowerCase().endsWith('.hx'))
+                    initHScript(file);
+                #end
+            }
+        #end
 
 		startCallback();
 		RecalculateRating();
