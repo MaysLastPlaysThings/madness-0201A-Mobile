@@ -3684,7 +3684,7 @@ class PlayState extends MusicBeatState
 	{
 		if(!ClientPrefs.data.shaders) return new FlxRuntimeShader();
 
-		#if (!flash && MODS_ALLOWED && sys)
+		#if (!flash && sys)
 		if(!runtimeShaders.exists(name) && !initLuaShader(name))
 		{
 			FlxG.log.warn('Shader $name is missing!');
@@ -3699,32 +3699,31 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	public function initLuaShader(name:String, ?glslVersion:Int = 120)
+	public function initLuaShader(name:String)
 	{
 		if(!ClientPrefs.data.shaders) return false;
 
-		#if (MODS_ALLOWED && !flash && sys)
+		#if (!flash && sys)
 		if(runtimeShaders.exists(name))
 		{
 			FlxG.log.warn('Shader $name was already initialized!');
 			return true;
 		}
 
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'shaders/'))
-		{
+   for (file in Assets.list().filter(folder -> folder.contains('assets/shared/shaders/')) {
 			var frag:String = folder + name + '.frag';
 			var vert:String = folder + name + '.vert';
 			var found:Bool = false;
-			if(FileSystem.exists(frag))
+			if(Assets.exists(frag))
 			{
-				frag = File.getContent(frag);
+				frag = Assets.getText(frag);
 				found = true;
 			}
 			else frag = null;
 
-			if(FileSystem.exists(vert))
+			if(Assets.exists(vert))
 			{
-				vert = File.getContent(vert);
+				vert = Assets.getText(vert);
 				found = true;
 			}
 			else vert = null;
