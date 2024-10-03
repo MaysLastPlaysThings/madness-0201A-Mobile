@@ -842,7 +842,7 @@ class PlayState extends MusicBeatState
 		#end
 		{
 			scriptFile = Paths.getSharedPath(scriptFile);
-			if(FileSystem.exists(scriptFile))
+			if(OpenFlAssets.exists(scriptFile))
 				doPush = true;
 		}
 
