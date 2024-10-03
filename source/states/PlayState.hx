@@ -3710,9 +3710,9 @@ class PlayState extends MusicBeatState
 			return true;
 		}
 
-   for (file in Assets.list().filter(folder -> folder.contains('assets/shared/shaders/'))) {
-			var frag:String = folder + name + '.frag';
-			var vert:String = folder + name + '.vert';
+     for (file in Assets.list().filter(folder -> folder.contains('assets/shared/shaders/'))) {
+            var frag:String = folder + name + '.frag';
+            var vert:String = folder + name + '.vert';
 			var found:Bool = false;
 			if(Assets.exists(frag))
 			{
