@@ -646,7 +646,7 @@ class PlayState extends MusicBeatState
 
         // SONG SPECIFIC SCRIPTS
         #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-            for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/'))
+            for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/')))
             {
                 #if LUA_ALLOWED
                 if(file.toLowerCase().endsWith('.lua'))
