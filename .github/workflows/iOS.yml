@@ -1,0 +1,40 @@
+name: iOS Build
+on:
+  workflow_dispatch:
+jobs:
+  iOS:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.3.4
+
+      - name: Install Libraries
+        run: |
+          haxelib install hmm --quiet
+          haxelib run hmm install --quiet
+          haxelib remove lime
+          haxelib remove extension-androidtools
+          haxelib git lime https://github.com/mcagabe19-stuff/lime.git --quiet
+          haxelib run lime rebuild hxcpp
+
+      - name: Compile
+        run: haxelib run lime build ios -nosign
+
+      - name: Make Ipa
+        run: |
+          cd export/release/ios/build/*-iphoneos
+          mkdir Payload
+          mv *.app Payload
+          zip -r MADNESS.ipa Payload
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: Madness Incident iOS
+          path: export/release/ios/build/Release-iphoneos/*.ipa
+          if-no-files-found: error
