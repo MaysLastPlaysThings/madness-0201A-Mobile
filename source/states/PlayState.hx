@@ -3710,40 +3710,47 @@ class PlayState extends MusicBeatState
 			return true;
 		}
 
-    for (folder in Assets.list().filter(file -> file.contains('assets/shared/shaders/'))) {
-			var frag:String = folder + name + '.frag';
-			var vert:String = folder + name + '.vert';
-			var found:Bool = false;
-			if(Assets.exists(frag))
-			{
-				frag = Assets.getText(frag);
-				found = true;
-			}
-			else frag = null;
+	//	for (folder in Assets.list().filter(file -> file.contains('assets/shared/shaders/'))) {
 
-			if(Assets.exists(vert))
+		var foldersToCheck:Array<String> = [Paths.getSharedPath('shaders/')]; // cheese burguer
+		for (folder in foldersToCheck)
+		{
+			for (file in Assets.list()) 
 			{
-				vert = Assets.getText(vert);
-				found = true;
-			}
-			else vert = null;
 
-			if(found)
-			{
-				runtimeShaders.set(name, [frag, vert]);
-				//trace('Found shader $name!');
-				return true;
-			}
-		}
+			   var frag:String = folder + name + '.frag';
+			   var vert:String = folder + name + '.vert';
+			   var found:Bool = false;
+			   if(Assets.exists(frag))
+			   {
+				  frag = Assets.getText(frag);
+				  found = true;
+			   }
+			   else frag = null;
+
+			   if(Assets.exists(vert))
+			   {
+				  vert = Assets.getText(vert);
+				  found = true;
+			   }
+			   else vert = null;
+
+			   if(found)
+			   {
+				 runtimeShaders.set(name, [frag, vert]);
+				 return true;
+			   }
+		  }   
+	   }
 			#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 			addTextToDebug('Missing shader $name .frag AND .vert files!', FlxColor.RED);
 			#else
 			FlxG.log.warn('Missing shader $name .frag AND .vert files!');
 			#end
-		#else
-		FlxG.log.warn('This platform doesn\'t support Runtime Shaders!');
-		#end
-		return false;
-	}
+	     	#else
+		    FlxG.log.warn('This platform doesn\'t support Runtime Shaders!');
+		    #end
+		        return false;
+	     }
 	#end
 }

@@ -93,7 +93,7 @@ class Mods
 	{
 		var foldersToCheck:Array<String> = [];
 		#if sys
-		if(FileSystem.exists(path + fileToFind))
+		if(openfl.utils.Assets.exists(path + fileToFind))
 		#end
 			foldersToCheck.push(path + fileToFind);
 
