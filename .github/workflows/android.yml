@@ -26,8 +26,6 @@ jobs:
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
           haxelib run lime rebuild hxcpp
-          haxelib remove flxanimate
-          haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
 
       - name: Configure Android
         run: |
