@@ -8,6 +8,8 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 @:structInit class SaveVariables {
+	public var unfairGimmicks:Bool = true;
+	public var trickyExperience:Bool = false;
 	public var padalpha:Float = 0.5;
 	public var hitboxalpha:Float = 0.2;
 	public var downScroll:Bool = false;
