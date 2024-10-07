@@ -4,11 +4,12 @@ import flixel.addons.ui.FlxUIState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxState;
 import backend.PsychCamera;
-#if mobile
 import mobile.MobileControls;
 import mobile.flixel.FlxVirtualPad;
+import flixel.FlxCamera;
+import flixel.input.actions.FlxActionInput;
 import flixel.util.FlxDestroyUtil;
-#end
+
 class MusicBeatState extends FlxUIState
 {
 	private var curSection:Int = 0;
@@ -25,15 +26,13 @@ class MusicBeatState extends FlxUIState
 		return Controls.instance;
 	}
 
-	var _psychCameraInitialized:Bool = false;
-
+	public static var instance:MusicBeatState;
+	
 	public var mobileControls:MobileControls;
 	public var virtualPad:FlxVirtualPad;
 
 	public var vpadCam:FlxCamera;
 	public var camControls:FlxCamera;
-
-	public static var instance:MusicBeatState;
 
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
@@ -100,6 +99,8 @@ class MusicBeatState extends FlxUIState
 		}
 	}
 
+	var _psychCameraInitialized:Bool = false;
+
 	override function create() {
 		instance = this;
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
@@ -108,10 +109,9 @@ class MusicBeatState extends FlxUIState
 		if(!_psychCameraInitialized) initPsychCamera();
 
 		super.create();
-		
 
 		if(!skip) {
-			openSubState(new MadnessTransition(0.6, true));
+			openSubState(new CustomFadeTransition(0.6, true));
 		}
 		FlxTransitionableState.skipNextTransOut = false;
 		timePassedOnState = 0;
@@ -233,14 +233,11 @@ class MusicBeatState extends FlxUIState
 		if(nextState == null)
 			nextState = FlxG.state;
 
-		if (FlxG.state.subState != null) FlxG.state.subState.openSubState(new MadnessTransition(0.6, false));
-		else FlxG.state.openSubState(new MadnessTransition(0.6, false));
-
-
+		FlxG.state.openSubState(new CustomFadeTransition(0.6, false));
 		if(nextState == FlxG.state)
-			MadnessTransition.finishCallback = function() FlxG.resetState();
+			CustomFadeTransition.finishCallback = function() FlxG.resetState();
 		else
-			MadnessTransition.finishCallback = function() FlxG.switchState(nextState);
+			CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
 	}
 
 	public static function getState():MusicBeatState {

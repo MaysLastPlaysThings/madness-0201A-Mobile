@@ -1,15 +1,15 @@
 package backend;
 
 import flixel.FlxSubState;
-#if mobile
+
 import mobile.MobileControls;
 import mobile.flixel.FlxVirtualPad;
+import flixel.FlxCamera;
 import flixel.util.FlxDestroyUtil;
-#end
+
 class MusicBeatSubstate extends FlxSubState
 {
 	public static var instance:MusicBeatSubstate;
-
 	public function new()
 	{
 		instance = this;
@@ -33,7 +33,6 @@ class MusicBeatSubstate extends FlxSubState
 	inline function get_controls():Controls
 		return Controls.instance;
 
-	#if mobile
 	public var mobileControls:MobileControls;
 	public var virtualPad:FlxVirtualPad;
 
@@ -106,7 +105,6 @@ class MusicBeatSubstate extends FlxSubState
 		
 		super.destroy();
 	}
-	#end
 
 	override function update(elapsed:Float)
 	{
