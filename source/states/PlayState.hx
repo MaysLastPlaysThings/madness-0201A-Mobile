@@ -3717,7 +3717,6 @@ class PlayState extends MusicBeatState
 		{
 			for (file in Assets.list()) 
 			{
-
 			   var frag:String = folder + name + '.frag';
 			   var vert:String = folder + name + '.vert';
 			   var found:Bool = false;
