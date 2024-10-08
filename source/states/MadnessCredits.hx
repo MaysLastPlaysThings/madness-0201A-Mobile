@@ -118,7 +118,7 @@ class MadnessCredits extends MusicBeatState
         displayedQuote.color = FlxColor.RED;
 
 		#if mobile
-		addVirtualPad(UP_DOWN, A_B);
+		addVirtualPad(UP_DOWN, A_B_C);
 		addVirtualPadCamera(false);
 		#end
 
@@ -141,6 +141,9 @@ class MadnessCredits extends MusicBeatState
 
         if (controls.ACCEPT) CoolUtil.browserLoad(credits[curSel].link);
 
+        if (virtualPad.buttonC.justPressed){
+            MusicBeatState.switchState(new CreditsState());
+        }
 
         if(controls.UI_DOWN || controls.UI_UP)
         {

@@ -402,7 +402,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		// "GLOBAL" SCRIPTS
-		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		#if (LUA_ALLOWED)
 		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'scripts/'))
 			for (file in FileSystem.readDirectory(folder))
 			{
@@ -620,10 +620,13 @@ class PlayState extends MusicBeatState
 		noteGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
 
-   #if mobile
-   addMobileControls(false);
-   mobileControls.visible = false;
-   #end
+		#if mobile
+		if (mobile.MobileControls.mode != 'Keyboard')
+		{
+		    addMobileControls(false);
+		    mobileControls.visible = false;
+		}
+		#end
 
 		startingSong = true;
 
@@ -634,7 +637,7 @@ class PlayState extends MusicBeatState
 			startLuasNamed('custom_events/' + event + '.lua');
 		#end
 
-		#if HSCRIPT_ALLOWED
+		#if MODS_ALLOWED
 		for (notetype in noteTypes)
 			startHScriptsNamed('custom_notetypes/' + notetype + '.hx');
 		for (event in eventsPushed)
@@ -983,9 +986,12 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown()
 	{
-	 #if mobile
-   mobileControls.visible = true;
-   #end
+		#if mobile
+		if (mobile.MobileControls.mode != 'Keyboard')
+		{
+            mobileControls.visible = true;
+		}
+        #end
 
 		if(startedCountdown) {
 			callOnScripts('onStartCountdown');
@@ -2482,9 +2488,13 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
-   #if mobile
-   mobileControls.visible = false;
-   #end
+		#if mobile
+		if (mobile.MobileControls.mode != 'Keyboard')
+		{
+            mobileControls.visible = false;
+		}
+        #end
+
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
