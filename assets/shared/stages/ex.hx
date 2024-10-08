@@ -89,7 +89,7 @@ function onCreate()
 function onCreatePost()
 {
 
-
+  game.instance.healthBar.updateBar();
     Paths.sound("healthPunch");
 	staticTimer = new FlxTimer();
 	distractionCooldownTimer = new FlxTimer();
