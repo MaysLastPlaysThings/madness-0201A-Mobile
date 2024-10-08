@@ -628,6 +628,8 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		startingSong = true;
+
 		#if LUA_ALLOWED
 		for (notetype in noteTypes)
 			startLuasNamed('custom_notetypes/' + notetype + '.lua');
