@@ -60,7 +60,8 @@ class NGIntro extends FlxState
 
     override function update(elapsed:Float) 
     {
-        if (ng.animation.curAnim != null)
+      #if desktop
+        if (ng.animation.curAnim != null && controls.instance.ACCEPT)
         {
             snd?.stop();
             snd?.destroy();
@@ -68,6 +69,7 @@ class NGIntro extends FlxState
             FlxTimer.wait(0.4,()->leave());
 
         }
+       #end
         super.update(elapsed);
     }
 
