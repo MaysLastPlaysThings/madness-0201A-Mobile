@@ -60,9 +60,9 @@ class CreditsState extends MusicBeatState
             ],
 			[
                 'Mateus X02',
-                'mateus',
+                'mateusx02',
                 'Porter',
-                ''
+                'https://www.youtube.com/@mateusx02'
             ],
 		/*	['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer and Head of Psych Engine',					 'https://ko-fi.com/shadowmario',		'444444'],
