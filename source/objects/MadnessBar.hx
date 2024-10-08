@@ -153,6 +153,4 @@ class MadnessBar extends FlxTypedSpriteGroup<FlxSprite>
             isFlipped ? this.y + (81 * scaleNum) : this.y + (82 * scaleNum)
         );
     }
-
-
 }
