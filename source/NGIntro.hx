@@ -60,7 +60,7 @@ class NGIntro extends FlxState
 
     override function update(elapsed:Float) 
     {
-        if (ng.animation.curAnim != null && Controls.instance.ACCEPT)
+        if (ng.animation.curAnim != null)
         {
             snd?.stop();
             snd?.destroy();
