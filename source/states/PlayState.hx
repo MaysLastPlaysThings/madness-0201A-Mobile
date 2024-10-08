@@ -621,8 +621,11 @@ class PlayState extends MusicBeatState
 		comboGroup.cameras = [camHUD];
 
    #if mobile
+   if (MobileControls.mode != 'Keyboard')
+   {
    addMobileControls(false);
    mobileControls.visible = false;
+   }
    #end
 
 		startingSong = true;
@@ -984,6 +987,7 @@ class PlayState extends MusicBeatState
 	public function startCountdown()
 	{
 	 #if mobile
+   if (MobileControls.mode != 'Keyboard')
    mobileControls.visible = true;
    #end
 
@@ -2483,6 +2487,7 @@ class PlayState extends MusicBeatState
 	public function endSong()
 	{
    #if mobile
+   if (MobileControls.mode != 'Keyboard')
    mobileControls.visible = false;
    #end
 		//Should kill you if you tried to cheat
