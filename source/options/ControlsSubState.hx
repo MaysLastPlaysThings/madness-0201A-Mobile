@@ -109,6 +109,11 @@ class ControlsSubState extends MusicBeatSubstate
 		text.setScale(0.4);
 		add(text);
 
+    #if mobile
+    addVirtualPad(NONE, B);
+    addVirtualPadCamera(false);
+    #end
+
 		createTexts();
 	}
 
@@ -275,9 +280,9 @@ class ControlsSubState extends MusicBeatSubstate
 
 		if(!binding)
 		{
-			if(FlxG.keys.justPressed.ESCAPE || FlxG.gamepads.anyJustPressed(B))
+			if(controls.BACK || FlxG.gamepads.anyJustPressed(B))
 			{
-				close();
+				FlxG.resetState();
 				return;
 			}
 			if(FlxG.keys.justPressed.CONTROL || FlxG.gamepads.anyJustPressed(LEFT_SHOULDER) || FlxG.gamepads.anyJustPressed(RIGHT_SHOULDER)) swapMode();
