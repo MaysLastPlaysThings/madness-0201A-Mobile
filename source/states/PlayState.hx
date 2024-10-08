@@ -620,6 +620,11 @@ class PlayState extends MusicBeatState
 		noteGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
 
+   #if mobile
+   addMobileControls(false);
+   mobileControls.visible = false;
+   #end
+
 		startingSong = true;
 
 		#if LUA_ALLOWED
@@ -978,6 +983,10 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown()
 	{
+	 #if mobile
+   mobileControls.visible = true;
+   #end
+
 		if(startedCountdown) {
 			callOnScripts('onStartCountdown');
 			return false;
@@ -1734,7 +1743,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != LuaUtils.Function_Stop) {
@@ -2473,6 +2482,9 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
+   #if mobile
+   mobileControls.visible = false;
+   #end
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
