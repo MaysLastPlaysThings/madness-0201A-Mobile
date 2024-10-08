@@ -991,8 +991,9 @@ class PlayState extends MusicBeatState
 	public function startCountdown()
 	{
 	 #if mobile
-   if (MobileControls.mode != 'Keyboard')
+   if (MobileControls.mode != 'Keyboard') {
    mobileControls.visible = true;
+   }
    #end
 
 		if(startedCountdown) {
@@ -2491,8 +2492,9 @@ class PlayState extends MusicBeatState
 	public function endSong()
 	{
    #if mobile
-   if (MobileControls.mode != 'Keyboard')
+   if (MobileControls.mode != 'Keyboard') {
    mobileControls.visible = false;
+   }
    #end
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
