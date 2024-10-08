@@ -138,6 +138,7 @@ function onCreatePost()
 
     game.gf.alpha = 0.00001;
 
+    game.instance.healthBar.updateBar();
 
     //needs to be in camgame for the shader
     red = new FlxSprite().makeGraphic(1,1,FlxColor.RED);
