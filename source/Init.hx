@@ -6,6 +6,10 @@ class Init extends FlxState
 
     override function create() {
 
+		#if mobile
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+
         Paths.clearStoredMemory();
 
 		FlxG.fixedTimestep = false;
