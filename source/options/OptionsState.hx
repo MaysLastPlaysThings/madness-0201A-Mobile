@@ -16,16 +16,31 @@ class OptionsState extends MusicBeatState
 	public static var onPlayState:Bool = false;
 
 	function openSelectedSubstate(label:String) {
-		switch(label) {
-			// case 'Note Colors':
-			// 	openSubState(new options.NotesSubState());
+	  switch(label) {
+			case 'Note Colors':
+			#if mobile
+			removeVirtualPad();
+			#end
+				openSubState(new options.NotesSubState());
 			case 'Controls':
+			#if mobile
+			removeVirtualPad();
+			#end
 				openSubState(new options.ControlsSubState());
 			case 'Graphics':
+			#if mobile
+			removeVirtualPad();
+			#end
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
+			#if mobile
+			removeVirtualPad();
+			#end
 				openSubState(new options.VisualsUISubState());
 			case 'Gameplay':
+			#if mobile
+			removeVirtualPad();
+			#end
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				MusicBeatState.switchState(new options.NoteOffsetState());
@@ -63,21 +78,14 @@ class OptionsState extends MusicBeatState
 			optionText.ID = i;
 			grpOptions.add(optionText);
 
-
-			// var shadow = new FlxText(optionText.x - 10,optionText.y + 10,0,options[i].toUpperCase(), 60);
-			// shadow.color = FlxColor.BLACK;
-			// shadow.font = 'Impact';
-			// insert(members.indexOf(grpOptions),shadow);
-
-
-			
 		}
-
-
-
 
 		changeSelection();
 		ClientPrefs.saveSettings();
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A_B_X_Y);
+		#end
 
 		super.create();
 	}
@@ -105,6 +113,18 @@ class OptionsState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+
+    #if mobile
+		if (virtualPad.buttonX.justPressed)
+		{
+			removeVirtualPad();
+			openSubState(new mobile.MobileControlsSubState());
+		}
+		if (virtualPad.buttonY.justPressed) {
+			removeVirtualPad();
+			openSubState(new mobile.AndroidSettingsSubState());
+		}
+		#end
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
