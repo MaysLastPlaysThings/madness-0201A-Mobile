@@ -53,7 +53,6 @@ class MadnessCredits extends MusicBeatState
         persistentUpdate = true;
         super.create();
 
-
         glow = new AttachedSprite('madnessmenu/credits/glows');
         glow.copyAlpha = false;
         glow.alpha = 0.7;
@@ -91,8 +90,6 @@ class MadnessCredits extends MusicBeatState
         add(character);
         character.scrollFactor.set();
 
-        
-
         var spotlight = new FlxSprite(FlxG.width - rim.width - 25,Paths.image('madnessmenu/credits/light'));
         spotlight.scale.copyFrom(rim.scale);
         spotlight.updateHitbox();
@@ -104,7 +101,6 @@ class MadnessCredits extends MusicBeatState
 
         // character.x = rim.x + (rim.width - character.width)/2;
         // character.y = rim.y - character.height + rim.height/2;
-
 
         displayedRole = new FlxText(0,0,FlxG.width - 25,'',60);
         displayedRole.alignment = RIGHT;
@@ -120,14 +116,13 @@ class MadnessCredits extends MusicBeatState
         add(displayedQuote);
         displayedQuote.y = rim.y + rim.height;
         displayedQuote.color = FlxColor.RED;
-        
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A_B);
+		addVirtualPadCamera(false);
+		#end
 
         changeSel();
-
-
-
-
-
     }
 
 
@@ -144,7 +139,7 @@ class MadnessCredits extends MusicBeatState
 
         if (controls.BACK) MusicBeatState.switchState(new MadnessMenu());
 
-        if (controls.ACCEPT || FlxG.mouse.justPressed) CoolUtil.browserLoad(credits[curSel].link);
+        if (controls.ACCEPT) CoolUtil.browserLoad(credits[curSel].link);
 
 
         if(controls.UI_DOWN || controls.UI_UP)
