@@ -56,9 +56,9 @@ class MusicBeatState extends FlxUIState
 
 		camControls = new FlxCamera();
 		camControls.bgColor.alpha = 0;
-		FlxG.cameras.add(camControls, DefaultDrawTarget);
+		FlxG.cameras.add(camControls, DefaultDrawTarget, false);
 
-		mobileControls.cameras = [camHUD];
+		mobileControls.cameras = [camControls];
 		mobileControls.visible = false;
 		add(mobileControls);
 	}
