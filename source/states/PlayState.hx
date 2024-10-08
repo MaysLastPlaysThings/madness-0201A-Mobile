@@ -52,6 +52,10 @@ import psychlua.HScript;
 import tea.SScript;
 #end
 
+#if mobile
+import mobile.MobileControls;
+#end
+
 class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 42;
