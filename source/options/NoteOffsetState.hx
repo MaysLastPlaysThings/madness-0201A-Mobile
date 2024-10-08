@@ -58,10 +58,6 @@ class Sigh extends BaseStage
 	
 	
 		for (i in [bg,sky,gradient,lightning,bgRocks,bgRocks1,light,light2,gruntBopper]) i.antialiasing = ClientPrefs.data.antialiasing;
-		#if mobile
-		addVirtualPad(LEFT_FULL, A_B);
-		addVirtualPadCamera(false);
-		#end
 	}
 
 
@@ -250,6 +246,11 @@ class NoteOffsetState extends MusicBeatState
 
 		Conductor.bpm = 128.0;
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
+
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPadCamera(false);
+		#end
 
 		super.create();
 	}
