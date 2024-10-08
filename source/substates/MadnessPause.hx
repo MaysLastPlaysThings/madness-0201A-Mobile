@@ -129,8 +129,6 @@ class MadnessPause extends MusicBeatSubstate
 
 		gen();
 
-
-
         panel.x = -panel.width;
         FlxTween.tween(panel, {x: 0},0.2,{ease: FlxEase.circOut});
 
@@ -140,27 +138,14 @@ class MadnessPause extends MusicBeatSubstate
             i.y = -i.height;
             FlxTween.tween(i, {y: prevY},0.2,{startDelay: 0.1,ease: FlxEase.circOut});
         }
-
-        
-        // topBar.y = -topBar.height;
-        // FlxTween.tween(topBar, {y: -30},0.2,{startDelay: 0.1,ease: FlxEase.circOut});
-
-
-        // timeText.x = timeText.width;
-        // FlxTween.tween(timeText, {x: 0},0.3,{startDelay: 0.2,ease: FlxEase.circOut});
-
-        // songText.x = -songText.width;
-        // FlxTween.tween(songText, {x: 25},0.3,{startDelay: 0.2,ease: FlxEase.circOut});
-        
-        // creditText.x = -creditText.width;
-        // FlxTween.tween(creditText, {x: prevCreditX},0.3,{startDelay: 0.2,ease: FlxEase.circOut});
-
-
-
-
 		super.create();
 
 		changeSel();
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A);
+		addVirtualPadCamera(false);
+		#end
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
